@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand: #f97316;
+    --brand-dark: #ea580c;
+    --ink: #0f172a;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-ink-50 text-ink-900 font-sans antialiased transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-ink-950 text-ink-100;
+  }
+
+  ::selection {
+    @apply bg-brand-200 text-brand-900;
+  }
+  .dark ::selection {
+    @apply bg-brand-500 text-white;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-2xl transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply btn bg-brand-500 text-white hover:bg-brand-600 shadow-soft hover:shadow-card;
+  }
+  .btn-ghost {
+    @apply btn bg-white text-ink-700 hover:bg-ink-100 border border-ink-200 dark:bg-ink-800 dark:text-ink-100 dark:hover:bg-ink-700 dark:border-ink-700;
+  }
+  .btn-dark {
+    @apply btn bg-ink-900 text-white hover:bg-ink-800 dark:bg-ink-100 dark:text-ink-900 dark:hover:bg-white;
+  }
+  .input {
+    @apply w-full rounded-2xl border border-ink-200 bg-white px-4 py-3 text-ink-900 placeholder:text-ink-400 outline-none transition-all duration-200 focus:border-brand-400 focus:ring-4 focus:ring-brand-100 dark:border-ink-700 dark:bg-ink-800 dark:text-ink-100 dark:placeholder:text-ink-500 dark:focus:ring-brand-500/20;
+  }
+  .label {
+    @apply block text-sm font-semibold text-ink-700 mb-1.5 dark:text-ink-300;
+  }
+  .card {
+    @apply bg-white rounded-3xl border border-ink-100 shadow-soft dark:bg-ink-900 dark:border-ink-800;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .dark .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  }
+  .mask-fade-r {
+    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  }
+}
+
+/* Theme toggle switch */
+#theme-toggle-button {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 7em;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+#theme-toggle-button input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+#theme-toggle-button svg {
+  display: block;
+  width: 7em;
+  height: auto;
+}
+#container,
+#patches,
+#stars,
+#button,
+#sun,
+#moon,
+#cloud {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.25s;
+}
+/* night sky background */
+#toggle:checked + svg #container {
+  fill: #2b4360;
+}
+/* move button to right when checked */
+#toggle:checked + svg #button {
+  transform: translate(56px, 0);
+}
+/* show/hide sun and moon based on checkbox state */
+#sun {
+  opacity: 1;
+}
+#toggle:checked + svg #sun {
+  opacity: 0;
+}
+#moon {
+  opacity: 0;
+}
+#toggle:checked + svg #moon {
+  opacity: 1;
+}
+/* show or hide background items on checkbox state */
+#cloud {
+  opacity: 1;
+}
+#toggle:checked + svg #cloud {
+  opacity: 0;
+}
+#stars {
+  opacity: 0;
+}
+#toggle:checked + svg #stars {
+  opacity: 1;
+}
+
+/* User profile / login button */
+.user-profile {
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background: linear-gradient(
+    to bottom right,
+    #f97316 0%,
+    rgba(249, 115, 22, 0) 30%
+  );
+  background-color: rgba(249, 115, 22, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.user-profile:hover,
+.user-profile:focus {
+  background-color: rgba(249, 115, 22, 0.7);
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+  outline: none;
+}
+.user-profile-inner {
+  border-radius: 13px;
+  background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 14px;
+  white-space: nowrap;
+}
+
+/* Flip card login/signup */
+.flip-wrapper {
+  --input-focus: #f97316;
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: #fff;
+  --main-color: #323232;
+}
+.flip-wrapper .flip-switch {
+  transform: translateY(-200px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 50px;
+  height: 20px;
+}
+.flip-wrapper .flip-card-side::before {
+  position: absolute;
+  content: 'Log in';
+  left: -70px;
+  top: 0;
+  width: 100px;
+  text-decoration: underline;
+  color: var(--font-color);
+  font-weight: 600;
+}
+.flip-wrapper .flip-card-side::after {
+  position: absolute;
+  content: 'Sign up';
+  left: 70px;
+  top: 0;
+  width: 100px;
+  text-decoration: none;
+  color: var(--font-color);
+  font-weight: 600;
+}
+.flip-wrapper .flip-toggle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.flip-wrapper .flip-slider {
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-color);
+  transition: 0.3s;
+}
+.flip-wrapper .flip-slider:before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  border: 2px solid var(--main-color);
+  border-radius: 5px;
+  left: -2px;
+  bottom: 2px;
+  background-color: var(--bg-color);
+  box-shadow: 0 3px 0 var(--main-color);
+  transition: 0.3s;
+}
+.flip-wrapper .flip-toggle:checked + .flip-slider {
+  background-color: var(--input-focus);
+}
+.flip-wrapper .flip-toggle:checked + .flip-slider:before {
+  transform: translateX(30px);
+}
+.flip-wrapper .flip-toggle:checked ~ .flip-card-side:before {
+  text-decoration: none;
+}
+.flip-wrapper .flip-toggle:checked ~ .flip-card-side:after {
+  text-decoration: underline;
+}
+.flip-wrapper .flip-card__inner {
+  width: 300px;
+  height: 350px;
+  position: relative;
+  background-color: transparent;
+  perspective: 1000px;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.flip-wrapper .flip-toggle:checked ~ .flip-card__inner {
+  transform: rotateY(180deg);
+}
+.flip-wrapper .flip-toggle:checked ~ .flip-card__front {
+  box-shadow: none;
+}
+.flip-wrapper .flip-card__front,
+.flip-wrapper .flip-card__back {
+  padding: 20px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: #f1f1f1;
+  gap: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+}
+.flip-wrapper .flip-card__back {
+  width: 100%;
+  transform: rotateY(180deg);
+}
+.flip-wrapper .flip-card__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.flip-wrapper .flip-title {
+  margin: 20px 0 20px 0;
+  font-size: 25px;
+  font-weight: 900;
+  text-align: center;
+  color: var(--main-color);
+}
+.flip-wrapper .flip-card__input {
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--font-color);
+  padding: 5px 10px;
+  outline: none;
+}
+.flip-wrapper .flip-card__input::placeholder {
+  color: var(--font-color-sub);
+  opacity: 0.8;
+}
+.flip-wrapper .flip-card__input:focus {
+  border: 2px solid var(--input-focus);
+}
+.flip-wrapper .flip-card__btn:active {
+  box-shadow: 0px 0px var(--main-color);
+  transform: translate(3px, 3px);
+}
+.flip-wrapper .flip-card__btn {
+  margin: 20px 0 20px 0;
+  width: 120px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--font-color);
+  cursor: pointer;
+}
